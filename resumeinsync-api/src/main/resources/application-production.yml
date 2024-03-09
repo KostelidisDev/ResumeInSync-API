@@ -1,0 +1,21 @@
+spring:
+  jpa:
+    show-sql: false
+  datasource:
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    url: ${DATABASE_URL}
+    driver-class-name: org.postgresql.Driver
+
+server:
+  compression:
+    enabled: true
+
+resume-in-sync-security:
+  client-id: ${CLIENT_ID}
+  client-secret: ${CLIENT_SECRET}
+  signing-key: ${SIGNING_KEY}
+  verifier-key: ${VERIFIER_KEY}
+  resource-id: ${RESOURCE_ID}
+  access-token-duration: ${ACCESS_TOKEN_DURATION}
+  refresh-token-duration: ${REFRESH_TOKEN_DURATION}

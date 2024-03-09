@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="{{metadata.language.language}}">
+<head>
+    <meta charset="utf-8">
+    <title>{{profile.firstName}} {{profile.lastName}} - {{metadata.generationDate}}</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin: 0 auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #007ACC;
+            color: #fff;
+            padding: 10px;
+        }
+
+        .avatar {
+            height: 100px;
+            border-radius: 255px;
+            border-width: 20px;
+            border: cyan;
+            border-style: dashed;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .section {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+        }
+
+        .section-title {
+            font-weight: bold;
+        }
+
+        .section-content {
+            margin: 10px;
+        }
+
+        .section-content-item {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #d5d4d4;
+        }
+
+        .mini-icon {
+            font-size: 1em;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 style="text-align: center;">
+        {{metadata.language.title}}
+    </h2>
+    <div class="header">
+        <div class="row text-center">
+            <div class="col">
+                <img class="avatar" src="{{profile.avatar}}" alt="Avatar"/>
+            </div>
+        </div>
+        <hr/>
+        <div class="row text-center">
+            <div class="col">
+                <h1>{{profile.firstName}} {{profile.lastName}}</h1>
+                <p>{{profile.bio}}</p>
+            </div>
+        </div>
+        <hr/>
+        <div class="row text-center">
+            <div class="col">
+                <span class="contact-entry">
+                    <span class="mini-icon">✉</span> {{user.email}}
+                </span>
+                <span class="contact-entry-separator">|</span>
+                <span class="contact-entry">
+                    <span class="mini-icon">✆</span> {{profile.mobilePhone}}
+                </span>
+                <span class="contact-entry-separator">|</span>
+                <span class="contact-entry">
+                    <span class="mini-icon">☎</span> {{profile.landPhone}}
+                </span>
+                <span class="contact-entry-separator">|</span>
+                <span class="contact-entry">
+                    <span class="mini-icon">⎙</span> {{profile.fax}}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="sections">
+        <div class="section working-experiences-section">
+            <div class="section-title">{{metadata.language.professionalExperiencesTitle}}</div>
+            <div class="section-content">
+                {{#each professionalExperiences }}
+                    <div class="section-content-item">
+                        <p>
+                            <strong>{{title}}</strong>
+                        </p>
+                        <p>
+                            {{formatDate dateRange.startDate}}
+                            -   {{#if currently}}
+                            {{metadata.language.currentlyTitle}}
+                        {{else}}
+                            {{formatDate dateRange.endDate}}
+                        {{/if}}
+                        </p>
+                        <p>{{company}}, {{location}}</p>
+                        <p>{{description}}</p>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="section volunteer-experiences-section">
+            <div class="section-title">{{metadata.language.volunteerExperiencesTitle}}</div>
+            <div class="section-content">
+                {{#each volunteerExperiences }}
+                    <div class="section-content-item">
+                        <p>
+                            <strong>{{role}}</strong>
+                            - {{formatDate dateRange.startDate}}
+                            -   {{#if currently}}
+                            {{metadata.language.currentlyTitle}}
+                        {{else}}
+                            {{formatDate dateRange.endDate}}
+                        {{/if}}
+                        </p>
+                        <p>{{organization}}, {{location}}</p>
+                        <p>{{description}}</p>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="section educations-section">
+            <div class="section-title">{{metadata.language.educationsTitle}}</div>
+            <div class="section-content">
+                {{#each educations }}
+                    <div class="section-content-item">
+                        <p>
+                            <strong>{{degree}} - {{field}} - {{grade}}</strong>
+                            - {{formatDate dateRange.startDate}}
+                            -   {{#if currently}}
+                            {{metadata.language.currentlyTitle}}
+                        {{else}}
+                            {{formatDate dateRange.endDate}}
+                        {{/if}}
+                        </p>
+                        <p>{{school}}</p>
+                        <p>{{description}}</p>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="section certifications-section">
+            <div class="section-title">{{metadata.language.certificationsTitle}}</div>
+            <div class="section-content">
+                {{#each certifications }}
+                    <div class="section-content-item">
+                        <p>
+                            <strong>{{name}}</strong>
+                            - {{formatDate dateRange.startDate}}
+                            {{#if canExpire}}
+                                - {{formatDate dateRange.endDate}}
+                            {{/if}}
+                        </p>
+                        <p>{{organization}}</p>
+                        <p>
+                            {{#if originalUrl}}
+                                <a href="{{originalUrl}}">
+                                    {{originalId}}
+                                </a>
+                            {{else}}
+                                {{originalId}}
+                            {{/if}}
+                        </p>
+                        <p>{{description}}</p>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="section skills-section">
+            <div class="section-title">{{metadata.language.skillsTitle}}</div>
+            <div class="section-content">
+                <div class="section-content-item">
+                    <p>
+                        {{#each skills}}
+                            {{name}},
+                        {{/each}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section languages-section">
+            <div class="section-title">{{metadata.language.languagesTitle}}</div>
+            <div class="section-content">
+                <div class="section-content-item">
+                    <p>
+                        {{#each languages}}
+                            {{name}} ({{proficiency}}),
+                        {{/each}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section publications-section">
+            <div class="section-title">{{metadata.language.publicationsTitle}}</div>
+            <div class="section-content">
+                {{#each publications}}
+                    <div class="section-content-item">
+                        <p>
+                            {{#if title}}
+                                {{metadata.language.publicationTitle}}: {{title}} <br />
+                            {{/if}}
+
+                            {{#if authors}}
+                                {{metadata.language.publicationAuthors}}: {{authors}} <br />
+                            {{/if}}
+
+                            {{#if publisher}}
+                                {{metadata.language.publicationPublisher}}: {{publisher}} <br />
+                            {{/if}}
+
+                            {{#if url}}
+                                {{metadata.language.publicationUrl}}: <a href="{{url}}" target="_blank">{{url}}</a>
+                            {{/if}}
+                        </p>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

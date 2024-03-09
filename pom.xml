@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.12.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>gr.ihu.ict</groupId>
+    <artifactId>resumeinsync-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>1-SNAPSHOT</version>
+
+    <name>ResumeInSync</name>
+    <description>All-In-One Resume Management Platform for Individuals</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <java.version>8</java.version>
+
+        <linkedin-data-importer.version>1.0-SNAPSHOT</linkedin-data-importer.version>
+        <zotero-publications-importer.version>1.0-SNAPSHOT</zotero-publications-importer.version>
+
+        <spring-security-oauth2.version>2.3.8.RELEASE</spring-security-oauth2.version>
+        <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
+        <vavr.version>0.10.4</vavr.version>
+        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+
+        <handlebars.version>4.0.7</handlebars.version>
+        <itext-core.version>8.0.3</itext-core.version>
+        <html2pdf.version>5.0.3</html2pdf.version>
+    </properties>
+
+    <modules>
+        <module>resumeinsync-api</module>
+        <module>resumeinsync-common</module>
+        <module>resumeinsync-domain</module>
+        <module>resumeinsync-dto</module>
+        <module>resumeinsync-mapper</module>
+        <module>resumeinsync-security</module>
+        <module>resumeinsync-service</module>
+        <module>resumeinsync-service-exporter</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Project Internal Dependencies-->
+            <dependency>
+                <groupId>gr.ihu.ict</groupId>
+                <artifactId>resumeinsync-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>gr.ihu.ict</groupId>
+                <artifactId>resumeinsync-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>gr.ihu.ict</groupId>
+                <artifactId>resumeinsync-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>gr.ihu.ict</groupId>
+                <artifactId>resumeinsync-dto</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>gr.ihu.ict</groupId>
+                <artifactId>resumeinsync-mapper</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>gr.ihu.ict</groupId>
+                <artifactId>resumeinsync-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>gr.ihu.ict</groupId>
+                <artifactId>resumeinsync-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>gr.ihu.ict</groupId>
+                <artifactId>resumeinsync-service-exporter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- LinkedIn Dependencies -->
+            <dependency>
+                <groupId>gr.ihu.ict</groupId>
+                <artifactId>linkedin-data-importer</artifactId>
+                <version>${linkedin-data-importer.version}</version>
+            </dependency>
+
+            <!-- Zotero Dependencies -->
+            <dependency>
+                <groupId>gr.ihu.ict</groupId>
+                <artifactId>zotero-publications-importer</artifactId>
+                <version>${zotero-publications-importer.version}</version>
+            </dependency>
+
+            <!-- Spring Security Dependencies -->
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${spring-security-oauth2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${spring-security-jwt.version}</version>
+            </dependency>
+
+            <!-- Hibernate Validator Dependencies -->
+            <dependency>
+                <groupId>org.hibernate.validator</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validator.version}</version>
+            </dependency>
+
+            <!-- Vavr Dependencies -->
+            <dependency>
+                <groupId>io.vavr</groupId>
+                <artifactId>vavr</artifactId>
+                <version>${vavr.version}</version>
+            </dependency>
+
+            <!-- MapStruct Dependencies -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${org.mapstruct.version}</version>
+            </dependency>
+
+            <!-- Handlebars Dependencies -->
+            <dependency>
+                <groupId>com.github.jknack</groupId>
+                <artifactId>handlebars</artifactId>
+                <version>${handlebars.version}</version>
+            </dependency>
+
+            <!-- iTextPdf Dependencies -->
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>itext-core</artifactId>
+                <version>${itext-core.version}</version>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>html2pdf</artifactId>
+                <version>${html2pdf.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

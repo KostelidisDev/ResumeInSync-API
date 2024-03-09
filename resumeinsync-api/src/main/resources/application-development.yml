@@ -1,0 +1,43 @@
+spring:
+  jpa:
+    show-sql: true
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://127.0.0.1:5432/resumeinsync
+    driver-class-name: org.postgresql.Driver
+
+server:
+  port: 8080
+  compression:
+    enabled: false
+
+resume-in-sync-security:
+  client-id: resumeinsync_api_username
+  client-secret: $2a$10$v0zgw3tj7F4fVf63Km6HRutUqS9aZAHNzQrjgRZuL6NpV.K.QzkC6
+  signing-key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    MIICWgIBAAKBgGe33ygPqKUh7SUd2tMEcScAFjekdZYR8tOYwgWZ0pY2UCjR7kdO
+    tfJjhkD983d7a4Opgs3jCL/bQdQ6okjOCAzEV6Ig5RWP/XkJ9XO+oHoPjBg6EBqh
+    kBqD/1ucEfSfx3Xtw0NATcK8WhKGU13kGHcsFTAbBffqsEyMn1ApkxinAgMBAAEC
+    gYA5yC8zo12h+b+jIPnK+7uKLbsy7pVvsLomdgEJm8O9Wa7YvvPPmCM3UYj25kPg
+    OcsRA7vStfwm3qDS+oN0qgvDU1B1hSpZO4ci8Xr3jQm/mJkYWMNJpsQaG3QYM9mL
+    K3It6R/mGeeFgX8F5e790Aj04G3Lbz1KpZGThdkzwfTJGQJBAKrIsv3nKzi3+vS5
+    ya0OJnSy24JFWs2LwOgm5G9cHDLla8GrkWx2l9gEC8EI4S5TuF7oL55jBqtH+gRi
+    KqP2mTsCQQCbeHL6aONr3KUcs3bMxZV2V2du+q9ENgrCdPsFWVzKRJBklEgr2kG8
+    TZ3mEFsacxMyfQ3bk0W0BcuB0XONgKeFAkAHCotGqJdBmWRBXr+P4Pt46D7gmhdq
+    Tg7AA4p7hOKsvoS40WgHfsQ35cLOTJ1sGYuKbiw4bYDC4w7Ny3ZSmEItAkAlinsx
+    DjzEId5YxNkN7zP9BHP8b1n8/ZOxiu/GReLLEK1RLCEVPbmbz54uHIrzIxBio6HC
+    AJjXNIMEkN/3LjbFAkAuf/TgJMHzkF05HnH5xOkBXLRG33mbRkGytmDIe3NJty+w
+    ZSJvnM2WYFhPvhw9b09KoApPrJlRKqtCHvdOM2D3
+    -----END RSA PRIVATE KEY-----
+  verifier-key: |
+    -----BEGIN PUBLIC KEY-----
+    MIGeMA0GCSqGSIb3DQEBAQUAA4GMADCBiAKBgGe33ygPqKUh7SUd2tMEcScAFjek
+    dZYR8tOYwgWZ0pY2UCjR7kdOtfJjhkD983d7a4Opgs3jCL/bQdQ6okjOCAzEV6Ig
+    5RWP/XkJ9XO+oHoPjBg6EBqhkBqD/1ucEfSfx3Xtw0NATcK8WhKGU13kGHcsFTAb
+    BffqsEyMn1ApkxinAgMBAAE=
+    -----END PUBLIC KEY-----
+  resource-id: ResumeInSync Resource
+  access-token-duration: 21600
+  refresh-token-duration: 86400

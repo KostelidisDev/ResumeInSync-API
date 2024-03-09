@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>resumeinsync-parent</artifactId>
+        <groupId>gr.ihu.ict</groupId>
+        <version>1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>resumeinsync-api</artifactId>
+
+    <dependencies>
+        <!-- Project Internal Dependencies-->
+
+        <dependency>
+            <groupId>gr.ihu.ict</groupId>
+            <artifactId>resumeinsync-mapper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>gr.ihu.ict</groupId>
+            <artifactId>resumeinsync-service</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Dependencies -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.hateoas</groupId>
+            <artifactId>spring-hateoas</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.name}-RELEASE</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>gr.ihu.ict.resumeinsync.api.ResumeInSyncAPIApplication</mainClass>
+                    <executable>true</executable>
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

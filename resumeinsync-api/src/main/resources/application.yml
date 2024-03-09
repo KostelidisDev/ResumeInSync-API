@@ -1,0 +1,44 @@
+spring:
+  flyway:
+    enabled: true
+  jpa:
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
+      ddl-auto: validate
+    properties:
+      hibernate:
+        initialization-mode: never
+        "[format_sql]": true
+        temp:
+          "[use_jdbc_metadata_defaults]": false
+        jdbc:
+          lob:
+            "[non_contextual_creation]": true
+    show-sql: false
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    open-in-view: true
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 128MB
+      max-request-size: 256MB
+  datasource:
+    driver-class-name: org.postgresql.Driver
+
+server:
+  port: 8080
+  compression:
+    enabled: true
+    min-response-size: 1024
+    mime-types: application/json, application/xml, text/plain
+
+resume-in-sync-security:
+  client-id:
+  client-secret:
+  signing-key:
+  verifier-key:
+  resource-id: ResumeInSync Resource
+  access-token-duration: 21600
+  refresh-token-duration: 86400
