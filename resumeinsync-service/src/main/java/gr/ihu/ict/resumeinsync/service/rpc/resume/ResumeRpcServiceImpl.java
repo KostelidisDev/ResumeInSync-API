@@ -27,6 +27,7 @@ import gr.ihu.ict.resumeinsync.service.exporter.ExporterService;
 import gr.ihu.ict.zotero.publications.importer.service.PublicationItemService;
 import io.vavr.Value;
 import io.vavr.collection.Seq;
+import io.vavr.control.Option;
 import io.vavr.control.Try;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.time.DateUtils;
@@ -38,6 +39,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -193,7 +195,7 @@ public class ResumeRpcServiceImpl implements ResumeRpcService {
                     publicationToCreate.setTitle(publication.getName());
                     publicationToCreate.setDescription(publication.getDescription());
                     publicationToCreate.setPublisher(publication.getPublisher());
-                    final Date publicationDate = dateFromLinkedInPublication(publication.getPublishedOn()).get();
+                    final Date publicationDate = publication.getPublishedOn();
                     publicationToCreate.setPublicationDate(publicationDate);
                     publicationToCreate.setUrl(publication.getUrl());
                     // ToDo: Parse co-authors
@@ -204,10 +206,6 @@ public class ResumeRpcServiceImpl implements ResumeRpcService {
                 }))
                 .flatMap(publicationCrudService::createAll);
 
-    }
-
-    private Try<Date> dateFromLinkedInPublication(String publishedOn) {
-        return Try.of(() -> DateUtils.parseDate(publishedOn, "MMM dd, YYYY"));
     }
 
     private Try<io.vavr.collection.List<ProfessionalExperience>> createPositionsLinkedIn(List<Position> positions,
@@ -222,7 +220,7 @@ public class ResumeRpcServiceImpl implements ResumeRpcService {
                     professionalExperienceToCreate.setCompany(position.getCompanyName());
                     professionalExperienceToCreate.setDescription(position.getDescription());
                     professionalExperienceToCreate.setLocation(position.getLocation());
-                    final DateRange dateRange = dateRangeFromLinkedInCertificate(
+                    final DateRange dateRange = dateRangeFromLinkedIn(
                             position.getStartedOn(),
                             position.getFinishedOn());
                     professionalExperienceToCreate.setDateRange(dateRange);
@@ -264,7 +262,7 @@ public class ResumeRpcServiceImpl implements ResumeRpcService {
                     educationToCreate.setSchool(education.getSchoolName());
                     educationToCreate.setDegree(education.getDegreeName());
                     educationToCreate.setField(education.getDegreeName());
-                    final DateRange dateRange = dateRangeFromLinkedInEducation(
+                    final DateRange dateRange = dateRangeFromLinkedIn(
                             education.getStartDate(),
                             education.getEndDate());
                     educationToCreate.setGrade(education.getDegreeName());
@@ -288,9 +286,10 @@ public class ResumeRpcServiceImpl implements ResumeRpcService {
 
                     certificationToCreate.setName(certification.getName());
                     certificationToCreate.setOrganization(certification.getAuthority());
-                    final DateRange dateRange = dateRangeFromLinkedInCertificate(
+                    final DateRange dateRange = dateRangeFromLinkedIn(
                             certification.getStartedOn(),
-                            certification.getFinishedOn());
+                            certification.getFinishedOn()
+                    );
                     final Boolean canExpire = BooleanUtils.NOT(Objects.isNull(dateRange.getEndDate()));
                     certificationToCreate.setCanExpire(canExpire);
                     certificationToCreate.setDateRange(dateRange);
@@ -303,58 +302,11 @@ public class ResumeRpcServiceImpl implements ResumeRpcService {
                 .flatMap(certificationCrudService::createAll);
     }
 
-    private DateRange dateRangeFromLinkedInCertificate(String startedOn, String finishedOn) {
-        Try<Date> startedOnDate = Try.of(() -> DateUtils.parseDate(startedOn, "MMM YYYY"));
-        Try<Date> finishedOnDate = Try.of(() -> DateUtils.parseDate(finishedOn, "MMM YYYY"));
-
-        if (finishedOnDate.isEmpty()) {
-            if (startedOnDate.isEmpty()) {
-                return new DateRange() {
-                    {
-                        setStartDate(new Date());
-                    }
-                };
-            }
-            return new DateRange() {
-                {
-                    setStartDate(startedOnDate.get());
-                }
-            };
-        }
-
-        return new DateRange() {
-            {
-                setStartDate(startedOnDate.get());
-                setEndDate(finishedOnDate.get());
-            }
-        };
-    }
-
-    private DateRange dateRangeFromLinkedInEducation(String startedOn, String finishedOn) {
-        Try<Date> startedOnDate = Try.of(() -> DateUtils.parseDate(startedOn, "YYYY"));
-        Try<Date> finishedOnDate = Try.of(() -> DateUtils.parseDate(finishedOn, "YYYY"));
-
-        if (finishedOnDate.isEmpty()) {
-            if (startedOnDate.isEmpty()) {
-                return new DateRange() {
-                    {
-                        setStartDate(new Date());
-                    }
-                };
-            }
-            return new DateRange() {
-                {
-                    setStartDate(startedOnDate.get());
-                }
-            };
-        }
-
-        return new DateRange() {
-            {
-                setStartDate(startedOnDate.get());
-                setEndDate(finishedOnDate.get());
-            }
-        };
+    private DateRange dateRangeFromLinkedIn(final Date fromDate, final Date toDate) {
+        final DateRange dateRange = new DateRange();
+        dateRange.setStartDate(fromDate);
+        dateRange.setEndDate(toDate);
+        return dateRange;
     }
 
     private Try<Profile> updateProfileLinkedIn(
