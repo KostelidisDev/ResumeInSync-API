@@ -1,4 +1,4 @@
-# ResumeInSync - Backend API
+# ResumeInSync API
 
 ## Overview
 
@@ -19,7 +19,7 @@ Contributions are welcome! If you find any issues or have suggestions for improv
 
 ## License
 
-This ResumeInSync - Backend API is licensed under the [MIT License](LICENSE). See the [LICENSE](LICENSE) file for more
+This Application (ResumeInSync API) is licensed under the [MIT License](LICENSE). See the [LICENSE](LICENSE) file for more
 details.
 
 ## Acknowledgments
