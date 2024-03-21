@@ -74,7 +74,11 @@
     <div class="header">
         <div class="row text-center">
             <div class="col">
-                <img class="avatar" src="{{profile.avatar}}" alt="Avatar"/>
+                {{#if profile.avatar}}
+                    <img alt="Avatar" class="avatar" src="{{profile.avatar}}"/>
+                {{else}}
+                    <img alt="Avatar" class="avatar" src="https://eu.ui-avatars.com/api/?&name={{profile.firstName}}+{{profile.lastName}}&size=128"/>
+                {{/if}}
             </div>
         </div>
         <hr/>
