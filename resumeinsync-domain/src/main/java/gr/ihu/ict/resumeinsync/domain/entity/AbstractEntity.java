@@ -7,7 +7,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Optional;
 
 @MappedSuperclass
 @Getter
@@ -61,8 +60,8 @@ public abstract class AbstractEntity implements Serializable {
 
         final AbstractEntity castedAbstractUserEntity = (AbstractEntity) abstractEntity;
 
-        final Date createdAt = Optional.ofNullable(getCreatedAt()).orElse(null);
-        final Date otherCreatedAt = Optional.ofNullable(castedAbstractUserEntity.getCreatedAt()).orElse(null);
+        final Date createdAt = getCreatedAt();
+        final Date otherCreatedAt = castedAbstractUserEntity.getCreatedAt();
 
         if (createdAt == null || otherCreatedAt == null) {
             return 0;

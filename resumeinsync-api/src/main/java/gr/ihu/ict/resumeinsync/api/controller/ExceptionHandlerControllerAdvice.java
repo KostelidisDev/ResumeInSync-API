@@ -16,7 +16,7 @@ public class ExceptionHandlerControllerAdvice {
         final String simpleName = e.getClass().getSimpleName();
         final VndErrors vndErrors = new VndErrors(
                 (message == null) ? "Unknown Message" : message,
-                (simpleName == null) ? "Unknown Simple Name" : simpleName
+                simpleName
                 );
 
         final ResponseEntity.BodyBuilder response = ResponseEntity.status(

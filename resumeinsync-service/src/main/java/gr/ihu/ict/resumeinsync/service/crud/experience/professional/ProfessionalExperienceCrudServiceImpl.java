@@ -41,7 +41,7 @@ public class ProfessionalExperienceCrudServiceImpl implements ProfessionalExperi
     public Try<ProfessionalExperience> create(final ProfessionalExperience entity) {
         return Try.run(() -> Objects.requireNonNull(entity, "entity is null"))
                 .flatMap(ignored -> ExperienceUtils.optimizeEndDate(entity))
-                .flatMap(workExperience -> ProfessionalExperienceCrudService.super.create(workExperience));
+                .flatMap(ProfessionalExperienceCrudService.super::create);
     }
 
     @Override

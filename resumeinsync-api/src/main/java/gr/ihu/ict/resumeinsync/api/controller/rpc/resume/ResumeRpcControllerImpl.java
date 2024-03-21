@@ -126,7 +126,7 @@ public class ResumeRpcControllerImpl implements ResumeRpcController {
         @PostMapping("/reset")
         public ResponseEntity<Void> reset() {
                 return AuthUtils.getAuthenticatedUser()
-                                .flatMap(user -> resumeRpcService.reset(user))
+                        .flatMap(resumeRpcService::reset)
                                 .map(ResponseEntity::ok)
                                 .get();
         }
@@ -135,7 +135,7 @@ public class ResumeRpcControllerImpl implements ResumeRpcController {
         @PostMapping("/import/zotero")
         public ResponseEntity<Void> importZotero(@RequestBody ImportZoteroDto importZoteroDto) {
                return AuthUtils.getAuthenticatedUser()
-               .flatMap(user -> Try.of(() -> importZoteroDto.getUserId())
+                       .flatMap(user -> Try.of(importZoteroDto::getUserId)
                .flatMap(zoteroUserId -> resumeRpcService.importZotero(user, zoteroUserId)))
                .map(ResponseEntity::ok)
                .get();

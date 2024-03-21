@@ -40,8 +40,7 @@ public class VolunteerExperienceCrudServiceImpl implements VolunteerExperienceCr
     public Try<VolunteerExperience> create(final VolunteerExperience entity) {
         return Try.run(() -> Objects.requireNonNull(entity, "entity is null"))
                 .flatMap(ignored -> ExperienceUtils.optimizeEndDate(entity))
-                .flatMap(optimizedVolunteerExperience -> VolunteerExperienceCrudService.super.create(
-                        optimizedVolunteerExperience));
+                .flatMap(VolunteerExperienceCrudService.super::create);
     }
 
     @Override

@@ -1,7 +1,10 @@
 package gr.ihu.ict.resumeinsync.common.constants;
 
+import lombok.Getter;
+
 import java.util.stream.Stream;
 
+@Getter
 public enum LanguageProficiency {
     ELEMENTARY("Elementary proficiency"),
     LIMITED_WORKING("Limited working proficiency"),
@@ -12,12 +15,8 @@ public enum LanguageProficiency {
 
     private final String value;
 
-    private LanguageProficiency(final String value) {
+    LanguageProficiency(final String value) {
         this.value = value;
-    }
-
-    public String getValue() {
-        return this.value;
     }
 
     public static LanguageProficiency parse(final String value) {

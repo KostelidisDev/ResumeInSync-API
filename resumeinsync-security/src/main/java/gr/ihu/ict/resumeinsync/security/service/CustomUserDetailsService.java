@@ -15,7 +15,7 @@ public interface CustomUserDetailsService extends UserDetailsService {
                         return customUserDetails;
                     }
                     if(customUserDetails == null) {
-                        return customUserDetails;
+                        return null;
                     }
                     BeanUtils.copyProperties(
                             user,

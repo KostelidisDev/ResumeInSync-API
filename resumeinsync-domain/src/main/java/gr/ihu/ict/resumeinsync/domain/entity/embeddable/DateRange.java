@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.util.Date;
 
-@SuppressWarnings("JpaDataSourceORMInspection")
 @Embeddable
 @Getter
 @Setter

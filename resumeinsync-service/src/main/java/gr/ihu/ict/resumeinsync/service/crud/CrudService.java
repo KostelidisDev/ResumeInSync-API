@@ -7,7 +7,6 @@ import io.vavr.collection.List;
 import io.vavr.collection.Map;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
-
 import org.slf4j.Logger;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -111,6 +110,6 @@ public interface CrudService<ENTITY_TYPE extends AbstractEntity, REPOSITORY_TYPE
     }
 
     default Try<Void> deleteAll(final List<String> ids) {
-        return Try.run(() -> ids.map(id -> deleteById(id)));
+        return Try.run(() -> ids.map(this::deleteById));
     }
 }

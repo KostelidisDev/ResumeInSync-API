@@ -55,7 +55,7 @@ public abstract class AuthUtils {
         return Try.of(User::new)
                 .flatMap(user -> Try.of(() -> {
                     if(user == null) {
-                        return user;
+                        return null;
                     }
                     if(userDetails == null) {
                         return user;

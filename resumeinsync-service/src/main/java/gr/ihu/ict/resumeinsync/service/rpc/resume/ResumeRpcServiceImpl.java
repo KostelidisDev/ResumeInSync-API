@@ -25,12 +25,11 @@ import gr.ihu.ict.resumeinsync.service.crud.skill.SkillCrudService;
 import gr.ihu.ict.resumeinsync.service.crud.user.UserCrudService;
 import gr.ihu.ict.resumeinsync.service.exporter.ExporterService;
 import gr.ihu.ict.zotero.publications.importer.service.PublicationItemService;
+import io.vavr.NotImplementedError;
 import io.vavr.Value;
 import io.vavr.collection.Seq;
-import io.vavr.control.Option;
 import io.vavr.control.Try;
 import lombok.AllArgsConstructor;
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,7 +38,6 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -323,7 +321,7 @@ public class ResumeRpcServiceImpl implements ResumeRpcService {
 
     @Override
     public Try<Void> uploadEuropass(final User user, final MultipartFile file) {
-        return null;
+        return Try.failure(new NotImplementedError());
     }
 
     private Try<File> fileFromMultipartFile(MultipartFile file) {
@@ -378,12 +376,10 @@ public class ResumeRpcServiceImpl implements ResumeRpcService {
 
         return Try.sequence(
                 userOwnedCrudServices
-                        .map(userOwnedCrudService -> {
-                            return userOwnedCrudService.findByUser(user)
-                                    .map(userOwnedEntities -> userOwnedEntities.map(AbstractUserOwnedEntity::getId))
-                                    .map(userOwnedCrudService::deleteAll)
-                                    .get();
-                        }))
+                        .map(userOwnedCrudService -> userOwnedCrudService.findByUser(user)
+                                .map(userOwnedEntities -> userOwnedEntities.map(AbstractUserOwnedEntity::getId))
+                                .map(userOwnedCrudService::deleteAll)
+                                .get()))
                 .map(Seq::toList)
                 .map(ignored -> null);
     }

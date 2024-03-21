@@ -1,5 +1,6 @@
 package gr.ihu.ict.resumeinsync.api.config.security;
 
+import io.vavr.control.Try;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -7,8 +8,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
-import io.vavr.control.Try;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
 import java.util.Objects;
 
@@ -27,9 +27,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity httpSecurity) throws Exception {
         Objects.requireNonNull(httpSecurity, "httpSecurity is null");
 
-        httpSecurity.csrf(csrf -> Try.of(() -> csrf.disable())
-                .map(disable -> Try.of(() -> disable.anonymous(anonymous -> {
-                    anonymous.disable();
-                }))));
+        httpSecurity.csrf(csrf -> Try.of(csrf::disable)
+                .map(disable -> Try.of(() -> disable.anonymous(AbstractHttpConfigurer::disable))));
     }
 }
