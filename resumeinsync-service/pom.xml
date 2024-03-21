@@ -7,7 +7,7 @@
     <parent>
         <artifactId>resumeinsync-parent</artifactId>
         <groupId>gr.ihu.ict</groupId>
-        <version>1-SNAPSHOT</version>
+        <version>2-SNAPSHOT</version>
     </parent>
 
     <artifactId>resumeinsync-service</artifactId>
