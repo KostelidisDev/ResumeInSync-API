@@ -1,4 +1,4 @@
-FROM maven:3-amazoncorretto-21 AS build
+FROM maven:3-amazoncorretto-21-alpine AS build
 COPY --from=linkedin-data-importer /root/.m2/repository/gr/ihu/ict/linkedin-data-importer /root/.m2/repository/gr/ihu/ict/linkedin-data-importer
 COPY --from=zotero-publications-importer  /root/.m2/repository/gr/ihu/ict/zotero-publications-importer /root/.m2/repository/gr/ihu/ict/zotero-publications-importer
 WORKDIR /opt/src
