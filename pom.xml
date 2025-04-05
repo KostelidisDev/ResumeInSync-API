@@ -29,12 +29,12 @@
 
         <spring-security-oauth2.version>2.5.2.RELEASE</spring-security-oauth2.version>
         <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
-        <vavr.version>0.10.4</vavr.version>
-        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+        <vavr.version>0.10.6</vavr.version>
+        <org.mapstruct.version>1.6.3</org.mapstruct.version>
 
-        <handlebars.version>4.3.1</handlebars.version>
-        <itext-core.version>8.0.3</itext-core.version>
-        <html2pdf.version>5.0.3</html2pdf.version>
+        <handlebars.version>4.4.0</handlebars.version>
+        <itext-core.version>9.1.0</itext-core.version>
+        <html2pdf.version>6.1.0</html2pdf.version>
     </properties>
 
     <modules>
