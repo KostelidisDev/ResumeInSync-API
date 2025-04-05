@@ -22,10 +22,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <java.version>8</java.version>
+        <java.version>21</java.version>
 
-        <linkedin-data-importer.version>3.1-SNAPSHOT</linkedin-data-importer.version>
-        <zotero-publications-importer.version>2.0-SNAPSHOT</zotero-publications-importer.version>
+        <linkedin-data-importer.version>4-SNAPSHOT</linkedin-data-importer.version>
+        <zotero-publications-importer.version>3-SNAPSHOT</zotero-publications-importer.version>
 
         <spring-security-oauth2.version>2.5.2.RELEASE</spring-security-oauth2.version>
         <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>

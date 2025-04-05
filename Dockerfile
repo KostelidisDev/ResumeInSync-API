@@ -1,20 +1,20 @@
-FROM maven:3-openjdk-8-slim as build
-COPY --from=iordaniskostelidis/linkedin-data-importer /root/.m2/repository/gr/ihu/ict/linkedin-data-importer /root/.m2/repository/gr/ihu/ict/linkedin-data-importer
-COPY --from=iordaniskostelidis/zotero-publications-importer /root/.m2/repository/gr/ihu/ict/zotero-publications-importer /root/.m2/repository/gr/ihu/ict/zotero-publications-importer
+FROM maven:3-amazoncorretto-21 AS build
+COPY --from=linkedin-data-importer /root/.m2/repository/gr/ihu/ict/linkedin-data-importer /root/.m2/repository/gr/ihu/ict/linkedin-data-importer
+COPY --from=zotero-publications-importer  /root/.m2/repository/gr/ihu/ict/zotero-publications-importer /root/.m2/repository/gr/ihu/ict/zotero-publications-importer
 WORKDIR /opt/src
 COPY . .
 RUN mvn package \
  && mv /opt/src/resumeinsync-api/target/resumeinsync-api-RELEASE.jar /opt/resumeinsync-api-RELEASE.jar \
  && mvn clean
 
-FROM openjdk:8u312-jre-slim
+FROM amazoncorretto:21-alpine
 
-RUN apt-get update \
-    && apt-get install -y \
-    locales \
-    locales-all \
-    mime-support \
-    && apt-get clean
+RUN apk update \
+ && apk add --no-cache \
+    libc6-compat \
+    gettext \
+    mailcap \
+ && rm -rf /var/cache/apk/*
 
 COPY --from=build /opt/resumeinsync-api-RELEASE.jar /opt/gr/ihu/ict/resumeinsync-api.jar
 
