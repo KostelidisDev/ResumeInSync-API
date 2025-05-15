@@ -91,26 +91,35 @@
         <hr/>
         <div class="row text-center">
             <div class="col">
+                {{#if user.email.length}}
                 <span class="contact-entry">
                     <span class="mini-icon">✉</span> {{user.email}}
                 </span>
+                {{/if}}
+                {{#if user.mobilePhone.length}}
                 <span class="contact-entry-separator">|</span>
                 <span class="contact-entry">
                     <span class="mini-icon">✆</span> {{profile.mobilePhone}}
                 </span>
+                {{/if}}
+                {{#if user.landPhone.length}}
                 <span class="contact-entry-separator">|</span>
                 <span class="contact-entry">
                     <span class="mini-icon">☎</span> {{profile.landPhone}}
                 </span>
+                {{/if}}
+                {{#if user.fax.length}}
                 <span class="contact-entry-separator">|</span>
                 <span class="contact-entry">
                     <span class="mini-icon">⎙</span> {{profile.fax}}
                 </span>
+                {{/if}}
             </div>
         </div>
     </div>
 
     <div class="sections">
+        {{#if professionalExperiences.length}}
         <div class="section working-experiences-section">
             <div class="section-title">{{metadata.language.professionalExperiencesTitle}}</div>
             <div class="section-content">
@@ -133,7 +142,8 @@
                 {{/each}}
             </div>
         </div>
-
+        {{/if}}
+        {{#if volunteerExperiences.length}}
         <div class="section volunteer-experiences-section">
             <div class="section-title">{{metadata.language.volunteerExperiencesTitle}}</div>
             <div class="section-content">
@@ -154,7 +164,8 @@
                 {{/each}}
             </div>
         </div>
-
+        {{/if}}
+        {{#if educations.length}}
         <div class="section educations-section">
             <div class="section-title">{{metadata.language.educationsTitle}}</div>
             <div class="section-content">
@@ -175,7 +186,8 @@
                 {{/each}}
             </div>
         </div>
-
+        {{/if}}
+        {{#if certifications.length}}
         <div class="section certifications-section">
             <div class="section-title">{{metadata.language.certificationsTitle}}</div>
             <div class="section-content">
@@ -203,7 +215,8 @@
                 {{/each}}
             </div>
         </div>
-
+        {{/if}}
+        {{#if skills.length}}
         <div class="section skills-section">
             <div class="section-title">{{metadata.language.skillsTitle}}</div>
             <div class="section-content">
@@ -216,7 +229,8 @@
                 </div>
             </div>
         </div>
-
+        {{/if}}
+        {{#if languages.length}}
         <div class="section languages-section">
             <div class="section-title">{{metadata.language.languagesTitle}}</div>
             <div class="section-content">
@@ -229,7 +243,8 @@
                 </div>
             </div>
         </div>
-
+        {{/if}}
+        {{#if publications.length}}
         <div class="section publications-section">
             <div class="section-title">{{metadata.language.publicationsTitle}}</div>
             <div class="section-content">
@@ -257,6 +272,7 @@
             </div>
         </div>
     </div>
+    {{/if}}
 </div>
 </body>
 </html>
